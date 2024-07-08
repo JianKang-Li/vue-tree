@@ -1,5 +1,5 @@
 <template>
-  <ul ref="el">
+  <ul ref="el" class="k-tree">
     <template v-for="(node, index) in nodes" :key="index">
       <TreeItem :node="node" :options="options"/>
     </template>
@@ -26,3 +26,15 @@ const el = ref(null)
 const nodes = ref(props.nodes)
 
 </script>
+
+<style scoped>
+ul.k-tree {
+  list-style: none;
+  padding: 0;
+}
+
+ul.k-tree ul {
+  list-style: none;
+  padding:0 0 0 18px;
+}
+</style>

@@ -7,18 +7,19 @@ import { ref } from 'vue'
 import Tree from "@/components/Tree"
 
 const nodes = ref([{
-  id: 1,
-  isParent: true,
-  name: 'root'
-},
-{
-  id: 2,
-  isParent: true,
-  name: 'li1'
-},
-{
-  id: 3,
-  isParent: false,
-  name: 'child'
+  id: 0,
+  name: 'root',
+  children: [{
+    id: 1,
+    name: 'li-1',
+    children: [{
+      id: 3,
+      name: 'li-1-1'
+    }]
+  },
+  {
+    id: 2,
+    name: 'li-2'
+  }]
 }])
 </script>
