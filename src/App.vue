@@ -3,6 +3,8 @@
 
 
   <button @click="getSelect">获取选中节点</button>
+  <button @click="cancelSelect">取消选中</button>
+  <button @click="getID1">获取节点</button>
 </template>
 
 <script setup>
@@ -14,6 +16,7 @@ const tree = ref(null)
 const nodes = ref([{
   id: 0,
   name: 'root',
+  checked: true,
   children: [{
     id: 1,
     name: 'li-1',
@@ -30,6 +33,15 @@ const nodes = ref([{
     checked: false
   }]
 }])
+
+const cancelSelect = () => {
+  tree.value.changeItem(false, 0)
+}
+
+const getID1 = () => {
+  const nodes = tree.value.getNodesByParams('id', 1)
+  console.log(nodes)
+}
 
 const getSelect = () => {
   console.log(tree.value.getCheckedNodes())

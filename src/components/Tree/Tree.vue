@@ -72,8 +72,14 @@ const getCheckedNodes = () => {
   return getNodes(nodes.value, 'checked' , true)
 }
 
+const getNodesByParams = (key, value) => {
+  return getNodes(nodes.value, key, value)
+}
+
 defineExpose({
-  getCheckedNodes
+  getCheckedNodes,
+  getNodesByParams,
+  changeItem
 })
 </script>
 

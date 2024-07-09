@@ -26,6 +26,7 @@ const props = defineProps({
     default: () => ({
       id: 0,
       name: 'tree-node',
+      checked: false
     })
   },
   options: {
@@ -45,7 +46,7 @@ const node = ref(props.node)
 const isParent = ref(node.value?.children?.length)
 const children = ref(node.value.children)
 const status = ref(options.status || true)
-const checked = ref(false)
+const checked = ref(props.node.checked)
 
 const changeStatus = () => {
   status.value = !status.value
@@ -53,6 +54,12 @@ const changeStatus = () => {
 
 watch(() => checked.value, (val) => {
   emit('changeCheck', val, node.value.id)
+})
+
+watch(() => props.node, (val) => {
+  checked.value = val.checked
+}, {
+  deep: true
 })
 
 const changeChild = (status, id) => {
