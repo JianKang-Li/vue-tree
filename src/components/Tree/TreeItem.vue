@@ -1,5 +1,5 @@
 <template>
-  <li :class="['k-tree-li', `k-tree-level-${props.level}`]">
+  <li v-show="show" :class="['k-tree-li', `k-tree-level-${props.level}`]">
     <span :class="[isParent? status ? 'open': 'close' : '', 'trigger-btn']" @click="changeStatus"></span>
     <input type="checkbox" v-show="options.showCheckBox" v-model="checked">
     <div class="k-tree-li-content">
@@ -47,6 +47,7 @@ const isParent = ref(node.value?.children?.length)
 const children = ref(node.value.children)
 const status = ref(options.status || true)
 const checked = ref(props.node.checked)
+const show = ref(props.node.visible !== false)
 
 const changeStatus = () => {
   status.value = !status.value
@@ -58,6 +59,7 @@ watch(() => checked.value, (val) => {
 
 watch(() => props.node, (val) => {
   checked.value = val.checked
+  show.value = val.visible !== false
 }, {
   deep: true
 })

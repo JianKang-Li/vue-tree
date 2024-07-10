@@ -4,7 +4,9 @@
 
   <button @click="getSelect">获取选中节点</button>
   <button @click="cancelSelect">取消选中</button>
-  <button @click="getID1">获取节点</button>
+  <button @click="getID1">获取id为1的节点</button>
+  <button @click="showNode">展示节点</button>
+  <button @click="getAll">获取所有节点</button>
 </template>
 
 <script setup>
@@ -24,7 +26,8 @@ const nodes = ref([{
     children: [{
       id: 3,
       name: 'li-1-1',
-      checked: false
+      checked: false,
+      visible: false
     }]
   },
   {
@@ -35,7 +38,7 @@ const nodes = ref([{
 }])
 
 const cancelSelect = () => {
-  tree.value.changeItem(false, 0)
+  tree.value.changeItemChecked(false, 0)
 }
 
 const getID1 = () => {
@@ -43,7 +46,15 @@ const getID1 = () => {
   console.log(nodes)
 }
 
+const showNode = () => {
+  tree.value.changeNode(3, {visible: true})
+}
+
 const getSelect = () => {
   console.log(tree.value.getCheckedNodes())
+}
+
+const getAll = () => {
+  console.log(tree.value.getAllNodes())
 }
 </script>

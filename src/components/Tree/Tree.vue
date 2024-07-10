@@ -1,13 +1,13 @@
 <template>
   <ul ref="el" class="k-tree">
     <template v-for="(node, index) in nodes" :key="index">
-      <TreeItem :node="node" :options="options" :level="level" @change-check="changeItem"/>
+      <TreeItem :node="node" :options="options" :level="level" @change-check="changeItemChecked"/>
     </template>
   </ul>
 </template>
 
 <script setup>
-import { nextTick, ref, h, defineComponent, computed } from 'vue'
+import { ref, computed } from 'vue'
 import TreeItem from './TreeItem.vue'
 import { defaultOptions } from "./utils/util"
 
@@ -32,7 +32,7 @@ const level = computed(() => {
   return props.level + 1
 })
 
-const changeNode = (arr, id, node) => {
+const changeItem = (arr, id, node) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) {
       for(const key in node) {
@@ -41,7 +41,7 @@ const changeNode = (arr, id, node) => {
     }
 
     if (arr[i].children && arr[i].children.length) {
-      changeNode(arr[i].children, id, node)
+      changeItem(arr[i].children, id, node)
     }
   }
   return
@@ -64,8 +64,12 @@ const getNodes = (arr, key, value) => {
   return nodes
 }
 
-const changeItem = (status, id) => {
-  changeNode(nodes.value, id, {checked: status})
+const changeItemChecked = (status, id) => {
+  changeItem(nodes.value, id, {checked: status})
+}
+
+const changeNode = (id, op) => {
+  changeItem(nodes.value, id, op)
 }
 
 const getCheckedNodes = () => {
@@ -76,10 +80,16 @@ const getNodesByParams = (key, value) => {
   return getNodes(nodes.value, key, value)
 }
 
+const getAllNodes = () => {
+  return getNodes(nodes.value)
+}
+
 defineExpose({
   getCheckedNodes,
   getNodesByParams,
-  changeItem
+  changeItemChecked,
+  changeNode,
+  getAllNodes
 })
 </script>
 
