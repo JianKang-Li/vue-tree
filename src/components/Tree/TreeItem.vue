@@ -7,9 +7,9 @@
     </div>
     <div v-show="status"  class="k-tree-subtree">
       <ul v-if="isParent">
-        <template v-for="(node, index) in children" :key="index">
+        <div v-for="node in children" :key="node.id">
           <TreeItem :node="node" :options="props.options" :level="props.level" @change-check="changeChild"/>
-        </template>
+        </div>
       </ul>
     </div>
   </li>

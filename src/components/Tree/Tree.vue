@@ -1,8 +1,8 @@
 <template>
   <ul ref="el" class="k-tree">
-    <template v-for="(node, index) in nodes" :key="index">
+    <div v-for="node in nodes" :key="node.id">
       <TreeItem :node="node" :options="options" :level="level" @change-check="changeItemChecked"/>
-    </template>
+    </div>
   </ul>
 </template>
 

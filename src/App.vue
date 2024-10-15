@@ -1,12 +1,14 @@
 <template>
-  <Tree :nodes="nodes" ref="tree"></Tree>
+  <div>
+    <Tree :nodes="nodes" ref="tree"></Tree>
 
 
-  <button @click="getSelect">获取选中节点</button>
-  <button @click="cancelSelect">取消选中</button>
-  <button @click="getID1">获取id为1的节点</button>
-  <button @click="showNode">展示节点</button>
-  <button @click="getAll">获取所有节点</button>
+    <button @click="getSelect">获取选中节点</button>
+    <button @click="cancelSelect">取消选中</button>
+    <button @click="getID1">获取id为1的节点</button>
+    <button @click="showNode">展示节点</button>
+    <button @click="getAll">获取所有节点</button>
+  </div>
 </template>
 
 <script setup>
@@ -47,7 +49,7 @@ const getID1 = () => {
 }
 
 const showNode = () => {
-  tree.value.changeNode(3, {visible: true})
+  tree.value.changeNode(3, { visible: true })
 }
 
 const getSelect = () => {
